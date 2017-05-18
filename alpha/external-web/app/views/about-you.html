@@ -1,0 +1,160 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+APVS Application Form
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <h1 class="heading-xlarge">
+                Apply for APVS
+            </h1>
+            <p>
+                This form lets you apply for the Assisted Prison Visits Scheme.
+            </p>
+
+            <p>
+                You may be eligible to receive support for costs associated with visiting a relative or friend in
+                prison.
+            </p>
+
+            {% if errors %}
+                <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+
+                <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                    Message to alert the user to a problem goes here
+                </h1>
+
+                <p>
+                    Optional description of the errors and how to correct them
+                </p>
+
+                <ul class="error-summary-list">
+                    {% for field, messages in errors %}
+                        {% if messages[0] %}
+                            <li><a href="#{{ field }}">{{ messages[0] }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+
+                </div>
+            {% endif %}
+
+            <form action="/about-you/{{ claimant['_id'] }}"
+                method="post" class="form">
+                <div class="form-group {% if errors['title'][0] %} error {% endif %}">
+                    <label class="form-label-bold" for="title">Title</label>
+                    <p class="form-hint">(Mr/Mrs/Miss/Ms)</p>
+                    {% if errors['title'][0] %}
+                        <span class="error-message" id="error-message-title">{{ errors['title'][0] }}</span>
+                    {% endif %}
+                    <input type="text" class="form-control" id="title" name="title"
+                        value="{{ claimant['personal']['title'] }}">
+                </div>
+
+                <div class="form-group {% if errors['first-name'][0] %} error {% endif %}">
+                    <label class="form-label-bold" for="first-name">First name</label>
+                    {% if errors['first-name'][0] %}
+                        <span class="error-message" id="error-message-first-name">{{ errors['first-name'][0] }}</span>
+                    {% endif %}
+                    <input type="text" class="form-control" id="first-name" name="first-name"
+                           value="{{ claimant['personal']['first-name'] }}">
+                </div>
+
+                <div class="form-group {% if errors['last-name'][0] %} error {% endif %}">
+                    <label class="form-label-bold" for="last-name">Last name</label>
+                    {% if errors['last-name'][0] %}
+                        <span class="error-message" id="error-message-last-name">{{ errors['last-name'][0] }}</span>
+                    {% endif %}
+                    <input type="text" class="form-control" id="last-name" name="last-name"
+                           value="{{ claimant['personal']['last-name'] }}">
+                </div>
+
+                <div class="form-group {% if errors['dob-day'][0] %} error
+                    {% elif errors['dob-month'][0] %} error
+                    {% elif errors['dob-year'][0] %} error {% endif %}">
+                    <fieldset>
+                        <legend class="form-label-bold">Date of birth</legend>
+
+                        <div class="form-date">
+                            <p class="form-hint">For example, 31 3 1980</p>
+
+                            {% if errors['dob-day'][0] %}
+                                <span class="error-message" id="error-message-dob-day">{{ errors['dob-day'][0] }}</span>
+                            {% endif %}
+                            {% if errors['dob-month'][0] %}
+                                <span class="error-message" id="error-message-dob-month">{{ errors['dob-month'][0] }}</span>
+                            {% endif %}
+                            {% if errors['dob-year'][0] %}
+                                <span class="error-message" id="error-message-dob-year">{{ errors['dob-year'][0] }}</span>
+                            {% endif %}
+
+                            <div class="form-group form-group-day">
+                                <label for="dob-day">Day</label>
+                                <input class="form-control" id="dob-day" name="dob-day"
+                                       value="{{ claimant['personal']['dob-day'] }}" type="number" pattern="[0-9]*"
+                                       min="0" max="31">
+                            </div>
+
+                            <div class="form-group form-group-month">
+                                <label for="dob-month">Month</label>
+                                <input class="form-control" id="dob-month" name="dob-month"
+                                       value="{{ claimant['personal']['dob-month'] }}" type="number" pattern="[0-9]*"
+                                       min="0" max="12">
+                            </div>
+
+                            <div class="form-group form-group-year">
+                                <label for="dob-year">Year</label>
+                                <input class="form-control" id="dob-year" name="dob-year"
+                                       value="{{ claimant['personal']['dob-year'] }}" type="number" pattern="[0-9]*"
+                                       min="0" max="2014">
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label-bold" for="national-insurance">National Insurance</label>
+                    <input type="text" class="form-control" id="national-insurance" name="national-insurance"
+                           value="{{ claimant['personal']['national-insurance'] }}">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label-bold" for="address">Home address</label>
+                    <input type="text" class="form-control" id="address" name="address"
+                           value="{{ claimant['personal']['address'] }}">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label-bold" for="postcode">Post Code</label>
+                    <input type="text" class="form-control" id="postcode" name="postcode"
+                           value="{{ claimant['personal']['postcode'] }}">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label-bold" for="email">Email address</label>
+                    <input type="text" class="form-control" id="email" name="email" value="{{ claimant['personal']['email'] }}">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label-bold" for="phone-number">Phone Number</label>
+                    <input type="text" class="form-control" id="phone-number" name="phone-number"
+                           value="{{ claimant['personal']['phone-number'] }}">
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Continue" class="button">
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>
+
+{% endblock %}

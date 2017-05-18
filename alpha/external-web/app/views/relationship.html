@@ -1,0 +1,163 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+APVS Application Form
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <h1 class="heading-xlarge">
+                Apply for APVS
+            </h1>
+            <p>
+                This form lets you apply for the Assisted Prison Visits Scheme.
+            </p>
+
+            <p>
+                You may be eligible to receive support for costs associated with visiting a relative or friend in
+                prison.
+            </p>
+
+            <form action="/relationship/{{ claimant['_id'] }}" method="post" class="form">
+
+                <div class="form-group">
+
+                    <!-- Relationship -->
+                    <fieldset>
+
+                        <label for="close-relative" class="block-label" data-target="close-relative-relationship">
+                            <input type="radio" id="close-relative" name="relationship" value="Close Relative"
+                                   {% if claimant['relationship']['relationship'] == 'Close Relative' %} checked {% endif %}>
+                            Close Relative
+                        </label>
+
+                        <div class="panel panel-border-narrow js-hidden" id="close-relative-relationship">
+                            <label for="relationship-to-prisoner" class="form-label">
+                                What is your relationship to the person you are visiting?
+                            </label>
+                            <input class="form-control" type="text" id="relationship-to-prisoner"
+                                   name="relationship-to-prisoner" value="{{ claimant['relationship']['relationship-to-prisoner'] }}">
+                        </div>
+
+                    </fieldset>
+
+                    <!-- Assistance -->
+                    <fieldset>
+
+                        <label for="partner" class="block-label" data-target="partner-established-relationship">
+                            <input type="radio" id="partner" name="relationship" value="Partner"
+                                   {% if claimant['relationship']['relationship'] == 'Partner' %} checked {% endif %}>
+                            Partner
+                        </label>
+
+                        <div class="panel panel-border-narrow js-hidden" id="partner-established-relationship">
+
+                            <label for="partner-established-relationship" class="form-label">
+                                Were you living as a couple, in an established relationship, immediately before the
+                                period of prison custody was imposed
+                            </label>
+
+                            <label class="block-label">
+                                <input type="radio" id="partner-established-relationship-yes"
+                                       name="established-relationship" value="Yes"
+                                       {% if claimant['relationship']['established-relationship'] == 'Yes' %} checked {% endif %}>
+                                Yes
+                            </label>
+
+                            <label class="block-label">
+                                <input type="radio" id="partner-established-relationship-no"
+                                       name="established-relationship" value="No"
+                                       {% if claimant['relationship']['established-relationship'] == 'No' %} checked {% endif %}>
+                                No
+                            </label>
+
+                        </div>
+
+                    </fieldset>
+
+                    <label for="sole-visitor" class="block-label">
+                        <input type="radio" id='sole-visitor' name="relationship" value="Sole Visitor"
+                               {% if claimant['relationship']['relationship'] == 'Sole Visitor' %} checked {% endif %} >
+                        Sole Visitor
+                    </label>
+
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+                    If you are a close relative, partner or a sole visitor, do you need someone to help you during the
+                    journey
+                    <fieldset>
+
+                        <label class="block-label" data-target="example_help">
+                            <input type="radio" id="journey-assistance-yes" name="journey-assistance" value="Yes"
+                                   {% if claimant['relationship']['journey-assistance'] == 'Yes' %} checked {% endif %}>
+                            Yes
+                        </label>
+
+                        <div class="panel panel-border-narrow js-hidden" id="example_help">
+
+                            <label class="block-label">
+                                <input type="radio" id="journey-assistance-reason-medical" name="journey-assistance-reason" value="Medical"
+                                       {% if claimant['relationship']['journey-assistance-reason'] == 'Medical' %} checked {% endif %}>
+                                Medical
+                            </label>
+
+                            <label class="block-label">
+                                <input type="radio" id="journey-assistance-reason-75" name="journey-assistance-reason" value="75 Plus"
+                                       {% if claimant['relationship']['journey-assistance-reason'] == '75 Plus' %} checked {% endif %}>
+                                Aged 75 years or over
+                            </label>
+
+                        </div>
+
+                        <label class="block-label">
+                            <input type="radio" id="journey-assistance-no" name="journey-assistance" value="No"
+                                   {% if claimant['relationship']['journey-assistance'] == 'No' %} checked {% endif %}>
+                            No
+                        </label>
+
+                    </fieldset>
+
+                    <br>
+
+                    <!-- Escorts -->
+                    <fieldset>
+
+                        <legend>
+                            Are you escorting someone to the prison?
+                        </legend>
+
+                        <label class="block-label">
+                            <input type="radio" id="escort-yes" name="escort" value="Yes"
+                                   {% if claimant['relationship']['escort'] == 'Yes' %} checked {% endif %}>
+                            Yes
+                        </label>
+
+                        <label class="block-label">
+                            <input type="radio" id="escort-no" name="escort" value="No"
+                                   {% if claimant['relationship']['escort'] == 'No' %} checked {% endif %}>
+                            No
+                        </label>
+
+                    </fieldset>
+
+                </div>
+
+                <div class="form-group"><input type="submit" value="Continue" class="button"></div>
+
+            </form>
+
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+
+

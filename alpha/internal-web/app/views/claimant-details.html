@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+{{ claimant['personal']['first-name'] }} {{ claimant['personal']['last-name'] }} Claimant Details
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+
+        <div>
+            {% include "claimant-application-details.html" %}
+        </div>
+
+        <div>
+            {% include "claimant-travel-profile.html" %}
+        </div>
+
+        <!-- Income Eligibility Status -->
+        <div>
+            {% include "claimant-income-check.html" %}
+        </div>
+
+        <!-- Relationship Status -->
+        <div>
+            {% include 'claimant-relationship-check.html' %}
+        </div>
+
+        <!-- Supporting Evidence -->
+        <div>
+            {% include 'includes/supporting-evidence.html' %}
+        </div>
+
+        <!-- Application Status -->
+        <div>
+            {% include 'claimant-application-check.html' %}
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}
