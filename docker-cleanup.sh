@@ -2,7 +2,7 @@
 
 DOCKER_PROCESSES=$(docker ps -a -q)
 DOCKER_IMAGES=$(docker images -q)
-NODE_CACHED_DEPENDENCIES=`ls -d ./alpha/docker/volumes/*/`
+NODE_CACHED_DEPENDENCIES=`ls -d ./services/docker/volumes/*/`
 
 # Stop and delete all containers and their associated volumes.
 if [ -n "$DOCKER_PROCESSES" ]; then
