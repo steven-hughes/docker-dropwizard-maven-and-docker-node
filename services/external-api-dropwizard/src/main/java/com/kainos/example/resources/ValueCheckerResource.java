@@ -21,7 +21,7 @@ public class ValueCheckerResource {
     }
 
     @POST
-    public ResponseObject checkAutomaticProcessing(RequestObject requestObject) {
-        return valueCheckerService.checkClaim(requestObject);
+    public ResponseObject processRequest(RequestObject requestObject) {
+        return valueCheckerService.checkValue(requestObject);
     }
 }

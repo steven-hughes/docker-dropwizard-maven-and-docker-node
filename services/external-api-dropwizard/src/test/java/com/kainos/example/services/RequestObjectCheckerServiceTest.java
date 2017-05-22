@@ -1,38 +1,27 @@
-//package com.kainos.external.services;
-//
-//import RequestObject;
-//import ResponseObject;
-//import ValueCheckerService;
-//import IValueCheckerService;
-//import com.kainos.apvs.example.enums.ClaimProcessingType;
-//import org.junit.Test;
-//
-//import static org.junit.Assert.assertEquals;
-//
-//public class RequestObjectCheckerServiceTest {
-//    IValueCheckerService claimChecker = new ValueCheckerService();
-//
-//    @Test
-//    public void checkClaim50ShouldReturnAutomaticTest() {
-//        RequestObject requestObject = new RequestObject(50);
-//        ResponseObject processingTypeResponse = claimChecker.checkClaim(requestObject);
-//
-//        assertEquals(ClaimProcessingType.AUTOMATIC.toString(), processingTypeResponse.getProcessingType());
-//    }
-//
-//    @Test
-//    public void checkClaim100ShouldReturnManualTest() {
-//        RequestObject requestObject = new RequestObject(100);
-//        ResponseObject processingTypeResponse = claimChecker.checkClaim(requestObject);
-//
-//        assertEquals(ClaimProcessingType.MANUAL.toString(), processingTypeResponse.getProcessingType());
-//    }
-//
-//    @Test
-//    public void checkClaimDecimalShouldReturnManualTest() {
-//        RequestObject requestObject = new RequestObject(100.5);
-//        ResponseObject processingTypeResponse = claimChecker.checkClaim(requestObject);
-//
-//        assertEquals(ClaimProcessingType.MANUAL.toString(), processingTypeResponse.getProcessingType());
-//    }
-//}
+package com.kainos.example.services;
+
+import com.kainos.example.api.RequestObject;
+import com.kainos.example.api.ResponseObject;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
+
+public class RequestObjectCheckerServiceTest {
+    IValueCheckerService valueCheckerService = new ValueCheckerService();
+
+    @Test
+    public void checkClaim50ShouldReturnAutomaticTest() {
+        RequestObject requestObject = new RequestObject(50);
+        ResponseObject responseObject = valueCheckerService.checkValue(requestObject);
+
+        assertTrue(responseObject.getMessages().contains("Great - less than 100"));
+    }
+
+    @Test
+    public void checkClaim100ShouldReturnManualTest() {
+        RequestObject requestObject = new RequestObject(100);
+        ResponseObject responseObject = valueCheckerService.checkValue(requestObject);
+
+        assertTrue(responseObject.getMessages().contains("Cool beans - 100 or more"));
+    }
+}

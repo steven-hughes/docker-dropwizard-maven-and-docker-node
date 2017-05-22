@@ -6,7 +6,7 @@ import com.kainos.example.api.ResponseObject;
 import java.util.ArrayList;
 
 public class ValueCheckerService implements IValueCheckerService {
-    public ResponseObject checkClaim(RequestObject requestObject) {
+    public ResponseObject checkValue(RequestObject requestObject) {
         ArrayList<String> messages = new ArrayList<String>();
         if (requestObject.getValue() < 100) {
             messages.add("Great - less than 100");
