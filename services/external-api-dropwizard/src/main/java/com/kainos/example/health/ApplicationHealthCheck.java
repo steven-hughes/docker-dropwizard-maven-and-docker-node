@@ -1,4 +1,4 @@
-package com.kainos.apvs.external.health;
+package com.kainos.example.health;
 
 import com.codahale.metrics.health.HealthCheck;
 

@@ -1,4 +1,4 @@
-package com.kainos.apvs.external;
+package com.kainos.example;
 
 import io.dropwizard.Configuration;
 

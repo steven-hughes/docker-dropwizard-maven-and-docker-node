@@ -1,8 +1,8 @@
-package com.kainos.apvs.external;
+package com.kainos.example;
 
-import com.kainos.apvs.external.health.ApplicationHealthCheck;
-import com.kainos.apvs.external.resources.ClaimCheckerResource;
-import com.kainos.apvs.external.services.ClaimCheckerService;
+import com.kainos.example.health.ApplicationHealthCheck;
+import com.kainos.example.resources.ValueCheckerResource;
+import com.kainos.example.services.ValueCheckerService;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -20,9 +20,9 @@ public class ExternalApplication extends Application<ExternalConfiguration> {
     @Override
     public void run(ExternalConfiguration configuration,
                     Environment environment) {
-        ClaimCheckerService claimChecker = new ClaimCheckerService();
-        final ClaimCheckerResource claimCheckerResource = new ClaimCheckerResource(claimChecker);
-        environment.jersey().register(claimCheckerResource);
+        ValueCheckerService claimChecker = new ValueCheckerService();
+        final ValueCheckerResource valueCheckerResource = new ValueCheckerResource(claimChecker);
+        environment.jersey().register(valueCheckerResource);
 
         ApplicationHealthCheck applicationHealthCheck = new ApplicationHealthCheck();
         environment.healthChecks().register("alive", applicationHealthCheck);

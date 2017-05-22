@@ -3,7 +3,7 @@
 A java implementation of an external API using dropwizard.
 
 ## Run the API within Docker
-The API runs within a docker container, and assumes that the JAR file `external-api-dropwizard-1.0-SNAPSHOT.jar` is located in a `target` folder in this directory.
+The API runs within a docker container, and assumes that the JAR file `example-api-dropwizard-1.0-SNAPSHOT.jar` is located in a `target` folder in this directory.
 
 To generate the necessary jar, run `mvn package` in this directory.
 
